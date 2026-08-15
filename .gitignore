@@ -1,0 +1,25 @@
+# Compiled files
+*.exe
+*.obj
+
+# MySQL Connector DLLs
+*.dll
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+
+# Build directories
+Debug/
+Release/
+x64/
+x86/
+
+# Environment / secrets
+.env
+*.env
+
+# Temporary files
+*.tmp
+*.log
