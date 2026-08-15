@@ -121,204 +121,189 @@ CUSTOMERS
 APPOINTMENTS
 ```
 
-🔄 Appointment Status Flow
+## 🔄 Appointment Status Flow
 
 A normal appointment follows this flow:
 
-WAITING
-   |
-   v
-IN_PROGRESS
-   |
-   v
-COMPLETED
+1. WAITING
+2. IN_PROGRESS
+3. COMPLETED
 
 A waiting appointment can also be cancelled:
 
-WAITING
-   |
-   v
-CANCELLED
-Available Statuses
-WAITING
-IN_PROGRESS
-COMPLETED
-CANCELLED
-🚦 Priority System
+1. WAITING
+2. CANCELLED
 
-The system supports two priority levels.
+### Available Statuses
 
-Priority	Value	Meaning
-Normal	0	Regular appointment
-Urgent	1	High-priority appointment
+- WAITING
+- IN_PROGRESS
+- COMPLETED
+- CANCELLED
+
+## 🚦 Priority System
+
+The system supports two priority levels:
+
+- Normal - Priority 0 - Regular appointment
+- Urgent - Priority 1 - High-priority appointment
 
 Urgent appointments are served before normal appointments.
 
 For appointments with the same priority, the lower token number is served first.
 
-💾 SQL Concepts Used
+## 💾 SQL Concepts Used
 
-The project demonstrates several SQL concepts.
+The project demonstrates several SQL concepts:
 
-CREATE DATABASE
-CREATE TABLE
-INSERT
-SELECT
-UPDATE
-DELETE
-WHERE
-JOIN
-ORDER BY
-COUNT
-SUM
-CASE
-Aggregate functions
-Primary keys
-Foreign keys
-Constraints
-AUTO_INCREMENT
-ENUM
-🔎 Example SQL JOIN
+- CREATE DATABASE
+- CREATE TABLE
+- INSERT
+- SELECT
+- UPDATE
+- DELETE
+- WHERE
+- JOIN
+- ORDER BY
+- COUNT
+- SUM
+- CASE
+- Aggregate functions
+- Primary keys
+- Foreign keys
+- Constraints
+- AUTO_INCREMENT
+- ENUM
+
+## 🔎 Example SQL JOIN
 
 Customer appointment history is retrieved using a JOIN.
 
-SELECT
-    a.appointment_id,
-    c.name,
-    a.token,
-    a.status
-FROM appointments a
-JOIN customers c
-ON a.customer_id = c.customer_id;
-📊 Daily Report
+The query joins the appointments table with the customers table using customer_id.
+
+## 📊 Daily Report
 
 The system generates statistics such as:
 
-Total appointments
-Waiting appointments
-In-progress appointments
-Completed appointments
-Cancelled appointments
-Urgent appointments
-Normal appointments
-Example
-Total Appointments : 15
-Waiting            : 8
-In Progress        : 1
-Completed          : 4
-Cancelled          : 2
-Urgent Appointments: 4
-Normal Appointments: 11
+- Total appointments
+- Waiting appointments
+- In-progress appointments
+- Completed appointments
+- Cancelled appointments
+- Urgent appointments
+- Normal appointments
 
-The report uses SQL aggregate functions such as:
+### Example Report
 
-COUNT()
-SUM()
-CASE
-🔍 Customer Search
+- Total Appointments: 15
+- Waiting: 8
+- In Progress: 1
+- Completed: 4
+- Cancelled: 2
+- Urgent Appointments: 4
+- Normal Appointments: 11
+
+## 🔍 Customer Search
 
 Customers can be searched using:
 
-Customer ID
-Phone number
+- Customer ID
+- Phone number
 
 The system also displays the customer's complete appointment history, including:
 
-Token
-Appointment date
-Appointment time
-Priority
-Status
-📋 Queue Management
+- Token
+- Appointment date
+- Appointment time
+- Priority
+- Status
 
-The queue displays only appointments with the status WAITING.
+## 📋 Queue Management
+
+The queue displays appointments with the status WAITING.
 
 The C++ priority_queue determines the service order.
 
-Example:
+### Example Queue
 
-Token    Customer          Priority
-------------------------------------
-2        Neha Sharma       URGENT
-4        Priya Singh       URGENT
-7        Karan Malhotra    URGENT
-1        Arjun Mehta       NORMAL
-3        Rohan Gupta       NORMAL
-🔨 Appointment Operations
-Add Customer
+- Token 2 - Neha Sharma - URGENT
+- Token 4 - Priya Singh - URGENT
+- Token 7 - Karan Malhotra - URGENT
+- Token 1 - Arjun Mehta - NORMAL
+- Token 3 - Rohan Gupta - NORMAL
+
+## 🔨 Appointment Operations
+
+### Add Customer
 
 Stores a new customer in the customers table.
 
-Book Appointment
+### Book Appointment
 
 Creates a new appointment and generates a queue token.
 
-Call Next Customer
+### Call Next Customer
 
 Selects the highest-priority waiting appointment and changes its status to IN_PROGRESS.
 
-Complete Appointment
+### Complete Appointment
 
 Changes an in-progress appointment to COMPLETED.
 
-Cancel Appointment
+### Cancel Appointment
 
 Changes a waiting appointment to CANCELLED.
 
-Search Customer
+### Search Customer
 
 Retrieves customer information and appointment history.
 
-Daily Report
+### Daily Report
 
 Calculates appointment statistics from the database.
 
-🧩 Project Architecture
-                +----------------------+
-                |      C++ Program     |
-                |                      |
-                |  Menu & Application  |
-                +----------+-----------+
-                           |
-                           | MySQL
-                           | Connector/C++
-                           v
-                +----------------------+
-                |    MySQL Database    |
-                |                      |
-                |    smart_queue       |
-                +----------+-----------+
-                           |
-                 +---------+---------+
-                 |                   |
-                 v                   v
-          +-------------+     +--------------+
-          |  customers  |     | appointments |
-          +-------------+     +--------------+
-📁 Project Structure
-SmartQueueSystem/
-|
-|-- main.cpp
-|-- database.sql
-|-- README.md
-`-- .gitignore
-⚙️ Requirements
-Windows
-Visual Studio Build Tools
-C++ compiler
-MySQL Server
-MySQL Connector/C++
-MySQL Workbench
-🗃️ Database Setup
-Install MySQL Server.
-Install MySQL Connector/C++.
-Open MySQL Workbench.
-Open database.sql.
-Execute the SQL script.
-The script creates the smart_queue database.
-The script creates the customers and appointments tables.
-Sample customer and appointment data is inserted.
-🔐 Configuration
+## 🧩 Project Architecture
+
+The application consists of two main components:
+
+- C++ application
+- MySQL database
+
+The C++ application communicates with MySQL using MySQL Connector/C++.
+
+The database contains:
+
+- Customers
+- Appointments
+
+## 📁 Project Structure
+
+- main.cpp - Main C++ application
+- database.sql - Database creation and sample data
+- README.md - Project documentation
+- .gitignore - Files excluded from Git
+
+## ⚙️ Requirements
+
+- Windows
+- Visual Studio Build Tools
+- C++ compiler
+- MySQL Server
+- MySQL Connector/C++
+- MySQL Workbench
+
+## 🗃️ Database Setup
+
+1. Install MySQL Server.
+2. Install MySQL Connector/C++.
+3. Open MySQL Workbench.
+4. Open database.sql.
+5. Execute the SQL script.
+6. The script creates the smart_queue database.
+7. The script creates the customers and appointments tables.
+8. Sample customer and appointment data is inserted.
+
+## 🔐 Configuration
 
 The MySQL password is not stored directly in the source code.
 
@@ -332,7 +317,7 @@ setx SMART_QUEUE_DB_PASSWORD "YOUR_PASSWORD"
 
 Open a new terminal after setting the variable.
 
-🔨 Compilation
+## 🔨 Compilation
 
 Using the Visual Studio x64 Native Tools Command Prompt:
 
@@ -341,7 +326,9 @@ cl /EHsc /MD /I"C:\Program Files\MySQL\MySQL Connector C++ 26.7\include" main.cp
 Run the application:
 
 main.exe
-🖥️ Main Menu
+
+## 🖥️ Main Menu
+
 1. Add Customer
 2. Book Appointment
 3. View Current Queue
@@ -351,54 +338,57 @@ main.exe
 7. Search Customer
 8. Daily Report
 9. Exit
-🧪 Sample Data
+
+## 🧪 Sample Data
 
 The project includes sample data containing:
 
-10 customers
-15 appointments
-Normal appointments
-Urgent appointments
-Waiting appointments
-In-progress appointments
-Completed appointments
-Cancelled appointments
+- 10 customers
+- 15 appointments
+- Normal appointments
+- Urgent appointments
+- Waiting appointments
+- In-progress appointments
+- Completed appointments
+- Cancelled appointments
 
 This sample data allows all major features of the system to be demonstrated.
 
-🔮 Future Improvements
+## 🔮 Future Improvements
 
 Possible future improvements include:
 
-GUI interface
-Login and role-based access
-Multiple service counters
-Real-time queue display
-Appointment reminders
-Web-based interface
-REST API
-Analytics dashboard
-Online appointment booking
-Admin dashboard
-🎯 Learning Outcomes
+- GUI interface
+- Login and role-based access
+- Multiple service counters
+- Real-time queue display
+- Appointment reminders
+- Web-based interface
+- REST API
+- Analytics dashboard
+- Online appointment booking
+- Admin dashboard
+
+## 🎯 Learning Outcomes
 
 Through this project, the following concepts were implemented:
 
-C++ programming
-STL data structures
-Priority queues
-Custom comparators
-SQL queries
-Database design
-Primary and foreign keys
-One-to-many relationships
-CRUD operations
-SQL JOINs
-Aggregate functions
-C++ and MySQL integration
-Environment variable based configuration
-👨‍💻 Author
+- C++ programming
+- STL data structures
+- Priority queues
+- Custom comparators
+- SQL queries
+- Database design
+- Primary and foreign keys
+- One-to-many relationships
+- CRUD operations
+- SQL JOINs
+- Aggregate functions
+- C++ and MySQL integration
+- Environment variable based configuration
 
-Ojas Lamba
+## 👨‍💻 Author
+
+**Ojas Lamba**
 
 BCA Student
