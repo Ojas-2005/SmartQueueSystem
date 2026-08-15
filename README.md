@@ -59,56 +59,59 @@ NORMAL + higher token
 ```
 ### Example
 
-Token 2 -> URGENT
-Token 4 -> URGENT
-Token 1 -> NORMAL
-Token 3 -> NORMAL
+- Token 2 -> URGENT
+- Token 4 -> URGENT
+- Token 1 -> NORMAL
+- Token 3 -> NORMAL
 
 The queue will serve:
 
-Token 2
-Token 4
-Token 1
-Token 3
-🗄️ Database Design
+1. Token 2
+2. Token 4
+3. Token 1
+4. Token 3
+
+## 🗄️ Database Design
 
 The system contains two main tables.
 
-👤 Customers Table
+### 👤 Customers Table
 
 Stores customer information.
 
-Column	Data Type	Description
-customer_id	INT	Unique customer ID
-name	VARCHAR(100)	Customer name
-phone	VARCHAR(15)	Customer phone number
-email	VARCHAR(100)	Customer email
-📅 Appointments Table
+- `customer_id` - INT - Unique customer ID
+- `name` - VARCHAR(100) - Customer name
+- `phone` - VARCHAR(15) - Customer phone number
+- `email` - VARCHAR(100) - Customer email
+
+### 📅 Appointments Table
 
 Stores appointment and queue information.
 
-Column	Data Type	Description
-appointment_id	INT	Unique appointment ID
-customer_id	INT	Reference to customer
-appointment_date	DATE	Appointment date
-appointment_time	TIME	Appointment time
-token	INT	Queue token
-priority	TINYINT	0 = Normal, 1 = Urgent
-status	ENUM	Appointment status
-🔑 Primary Keys
-customers.customer_id
-appointments.appointment_id
+- `appointment_id` - INT - Unique appointment ID
+- `customer_id` - INT - Reference to customer
+- `appointment_date` - DATE - Appointment date
+- `appointment_time` - TIME - Appointment time
+- `token` - INT - Queue token
+- `priority` - TINYINT - 0 = Normal, 1 = Urgent
+- `status` - ENUM - Appointment status
+
+### 🔑 Primary Keys
+
+- `customers.customer_id`
+- `appointments.appointment_id`
 
 Each appointment also has a unique token.
 
-🔗 Foreign Key
+### 🔗 Foreign Key
 
-The customer_id column in the appointments table is a foreign key referencing customers.customer_id.
+The `customer_id` column in the `appointments` table is a foreign key referencing `customers.customer_id`.
 
-🔗 Database Relationship
+## 🔗 Database Relationship
 
 The database uses a one-to-many relationship.
 
+```text
 CUSTOMERS
     |
     | 1
@@ -116,8 +119,7 @@ CUSTOMERS
     | many
     v
 APPOINTMENTS
-
-One customer can have multiple appointments, while each appointment belongs to one customer.
+```
 
 🔄 Appointment Status Flow
 
