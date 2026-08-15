@@ -56,7 +56,8 @@ NORMAL + lower token
         |
         v
 NORMAL + higher token
-Example
+```
+### Example
 
 Token 2 -> URGENT
 Token 4 -> URGENT
